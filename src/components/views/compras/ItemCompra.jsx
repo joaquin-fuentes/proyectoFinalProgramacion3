@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap"
 import { Link, NavLink } from "react-router-dom"
 
-const ItemCompra = () => {
+const ItemCompra = ({key}) => {
     return (
         <tr>
         <td>1</td>
