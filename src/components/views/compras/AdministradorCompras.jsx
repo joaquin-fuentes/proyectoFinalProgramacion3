@@ -5,7 +5,7 @@ import ItemCompra from './ItemCompra';
 const Compras = () => {
     return (
         <Container className='my-3 main'>
-            <div className='d-flex justify-content-between '>
+            <div className='mb-3 d-flex justify-content-between '>
                 <h3>Compras</h3>
                 <Button variant="success" >Nueva Compra</Button>
             </div>

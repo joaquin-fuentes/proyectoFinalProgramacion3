@@ -5,9 +5,9 @@ import ItemVenta from './ItemVenta';
 const Ventas = () => {
     return (
         <Container className='my-3 main'>
-            <div className='d-flex justify-content-between '>
+            <div className='mb-3 d-flex justify-content-between '>
                 <h3>Ventas</h3>
-                <Button variant="success" >Agregar</Button>
+                <Button variant="success" >Nueva Venta</Button>
             </div>
             <Form>
                 <Row className="align-items-center">
