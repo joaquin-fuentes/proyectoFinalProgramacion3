@@ -33,39 +33,39 @@ const Resumen = () => {
                 </Row>
             </Form>
             <hr />
-            <Row className='mt-4'>
+            <Row className='mt-4 d-flex '>
                 <Col md={4}>
-                    <Card border="success" style={{ width: '18rem' }}>
+                    <Card border="success" className='m-3 m-md-1'>
                         <Card.Body>
-                            <Card.Title className='mb-3'>Ingresos</Card.Title>
+                            <Card.Title className='mb-3 fw-bold'>Ingresos</Card.Title>
                             <Card.Text>
-                              Desde: 20/05/2022 <br />
-                              Hasta: 20/06/2022 <br />
-                                <h4 className='mt-3'>$75.000</h4>
+                                <span>Desde: 20/05/2022</span>  <br />
+                                <span>Hasta: 20/06/2022</span>  <br />
+                                <span className='mt-5 fs-2 fw-bold'>$75.000 </span>
                             </Card.Text>
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col md={4}>
-                    <Card border="danger" style={{ width: '18rem' }}>
+                    <Card border="danger" className='m-3 m-md-1'>
                         <Card.Body>
-                            <Card.Title className='mb-3'>Egresos</Card.Title>
+                            <Card.Title className='mb-3 fw-bold'>Egresos</Card.Title>
                             <Card.Text>
-                              Desde: 20/05/2022 <br />
-                              Hasta: 20/06/2022 <br />
-                                <h4 className='mt-3'>$27.000</h4>
+                                <span>Desde: 20/05/2022</span>  <br />
+                                <span>Hasta: 20/06/2022</span>  <br />
+                                <span className='mt-5 fs-2 fw-bold'>$27.000 </span>
                             </Card.Text>
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col md={4}>
-                    <Card border="warning" style={{ width: '18rem' }}>
+                    <Card border="warning" className='m-3 m-md-1'>
                         <Card.Body>
                             <Card.Title>Estado de resultados</Card.Title>
                             <Card.Text>
-                              Desde: 20/05/2022 <br />
-                              Hasta: 20/06/2022 <br />
-                                <h4 className='mt-3'>$48.000</h4>
+                                <span>Desde: 20/05/2022</span>  <br />
+                                <span>Hasta: 20/06/2022</span>  <br />
+                                <span className='mt-5 fs-2 fw-bold'>$48.000 </span>
                             </Card.Text>
                         </Card.Body>
                     </Card>
