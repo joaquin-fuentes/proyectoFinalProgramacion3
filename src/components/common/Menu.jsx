@@ -26,7 +26,7 @@ const Menu = () => {
             <NavLink end to={"/ventas"} className="nav-item nav-link text-light" onClick={handleNavLinkClick}>Ventas</NavLink>
             <NavLink end to={"/compras"} className="nav-item nav-link text-light" onClick={handleNavLinkClick}>Compras</NavLink>
             <NavLink end to={"/productos"} className="nav-item nav-link text-light" onClick={handleNavLinkClick}>Productos</NavLink>
-            <NavLink end to={"/"} className="nav-item nav-link text-light" onClick={handleNavLinkClick}>Resumen</NavLink>
+            <NavLink end to={"/resumen"} className="nav-item nav-link text-light" onClick={handleNavLinkClick}>Resumen</NavLink>
           </Nav>
         </Navbar.Collapse>
       </Container>

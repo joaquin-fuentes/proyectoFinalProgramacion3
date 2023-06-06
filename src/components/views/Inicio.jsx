@@ -11,7 +11,7 @@ const Inicio = () => {
                 <NavLink  to={"/ventas"} className={"btn btn-size-lg btn-outline-success"} >VENTAS</NavLink>
                 <NavLink  to={"/compras"} className={"btn btn-size-lg btn-outline-success"} >COMPRAS</NavLink>
                 <NavLink  to={"/productos"} className={"btn btn-size-lg btn-outline-success"} >PRODUCTOS</NavLink>
-                <NavLink  to={"/ventas"} className={"btn btn-size-lg btn-outline-success"} >RESUMEN</NavLink>
+                <NavLink  to={"/resumen"} className={"btn btn-size-lg btn-outline-success"} >RESUMEN</NavLink>
             </div>
         </Container>
     );
