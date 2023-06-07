@@ -10,7 +10,7 @@ const ItemProducto = ({key}) => {
         <td>$600</td>
         <td>36</td>
         <td className='text-center'>
-           <NavLink end to={""} className={"m-1 btn btn-outline-success"} >Editar</NavLink>
+           <NavLink end to={"/productos/editar"} className={"m-1 btn btn-success"} >Editar</NavLink>
            <NavLink end to={""} className={"m-1 btn btn-outline-danger"} >Borrar</NavLink>
 
         </td>

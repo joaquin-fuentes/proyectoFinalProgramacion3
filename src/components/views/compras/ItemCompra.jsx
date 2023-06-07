@@ -9,7 +9,7 @@ const ItemCompra = ({key}) => {
         <td>Coca Cola S.A</td>
         <td>$600</td>
         <td className='text-center'>
-        <NavLink end to={""} className={"btn btn-outline-success"} >Ver detalle</NavLink>
+        <NavLink end to={"/compras/detalle"} className={"btn btn-success"} >Ver detalle</NavLink>
         </td>
     </tr>
     );

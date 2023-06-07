@@ -1,5 +1,7 @@
 import React from 'react';
 import { Container, Button, Table, Form, InputGroup, Row, Col } from "react-bootstrap"
+import { Link, NavLink } from "react-router-dom"
+
 import ItemVenta from './ItemVenta';
 
 const Ventas = () => {
@@ -7,7 +9,7 @@ const Ventas = () => {
         <Container className='my-3 main'>
             <div className='mb-3 d-flex justify-content-between '>
                 <h3>Ventas</h3>
-                <Button variant="success" >Nueva Venta</Button>
+                <NavLink  to={"/ventas/crear"} className={"mt-2 btn btn-size-lg btn-success"} >Nueva Venta</NavLink>
             </div>
             <Form>
                 <Row className="align-items-center">

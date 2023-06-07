@@ -10,7 +10,7 @@ const ItemVenta = () => {
         <td>$600</td>
         <td>Joaquin Fuentes</td>
         <td className='text-center'>
-        <NavLink end to={""} className={"btn btn-outline-success"} >Ver detalle</NavLink>
+        <NavLink end to={"/ventas/detalle"} className={"btn btn-success"} >Ver detalle</NavLink>
         </td>
     </tr>
     );
