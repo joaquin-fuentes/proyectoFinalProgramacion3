@@ -8,7 +8,7 @@ const Productos = () => {
         <Container className='my-3 main'>
             <div className='mb-3 d-flex justify-content-between '>
                 <h3>Productos</h3>
-                <NavLink  to={"/productos/crear"} className={"mt-2 btn btn-size-lg btn-success"} >Cargar Nuevo Producto</NavLink>
+                <NavLink  to={"/productos/crear"} className={"mt-2 btn btn-size-lg btn-success"} >Crear Nuevo Producto</NavLink>
             </div>
             <Form>
                 <Row className="align-items-center">
