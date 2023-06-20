@@ -50,7 +50,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
   return (
     <Navbar bg="success" expand="md" className="mb-3">
       <Container fluid>
-        <Navbar.Brand as={Link} to={"/"} className="text-light"><FcBullish className="fs-1" /> VentaMax</Navbar.Brand>
+        <Navbar.Brand as={Link} to={"/inicio"} className="text-light"><FcBullish className="fs-1" /> VentaMax</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" onClick={toggleExpand} />
         <Navbar.Collapse id="navbar-nav" className={expand ? "show" : ""}>
           <Nav className="justify-content-end flex-grow-1 pe-3">
