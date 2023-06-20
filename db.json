@@ -85,6 +85,52 @@
           "cantidad": 6
         }
       ]
+    },
+    {
+      "id": 2,
+      "fecha": "13/01/1994",
+      "nombreCliente": "otro cliente",
+      "nombreVendedor": "otro vendedor",
+      "productosVendidos": [
+        {
+          "nombreProducto": "pepsi 2L",
+          "precio": 500,
+          "cantidad": 6
+        },
+        {
+          "nombreProducto": "coca cola 3L",
+          "precio": 1000,
+          "cantidad": 6
+        },
+        {
+          "nombreProducto": "doble cola 3L",
+          "precio": 400,
+          "cantidad": 6
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "fecha": "13/01/1994",
+      "nombreCliente": "otro cliente",
+      "nombreVendedor": "otro vendedor",
+      "productosVendidos": [
+        {
+          "nombreProducto": "pepsi 2L",
+          "precio": 500,
+          "cantidad": 6
+        },
+        {
+          "nombreProducto": "coca cola 3L",
+          "precio": 1000,
+          "cantidad": 6
+        },
+        {
+          "nombreProducto": "doble cola 3L",
+          "precio": 400,
+          "cantidad": 6
+        }
+      ]
     }
   ]
 }
