@@ -61,11 +61,11 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                   <NavLink end to={"/compras"} className="nav-item nav-link text-light" onClick={handleNavLinkClick}>Compras</NavLink>
                   <NavLink end to={"/productos"} className="nav-item nav-link text-light" onClick={handleNavLinkClick}>Productos</NavLink>
                   <NavLink end to={"/resumen"} className="nav-item nav-link text-light" onClick={handleNavLinkClick}>Resumen</NavLink>
-                  <Button variant="success" onClick={logout}>Logout</Button>
+                  <Button variant="success" onClick={logout}>Salir</Button>
 
                 </>
                 :
-                <NavLink end to={"/"} className="nav-item nav-link text-light" onClick={handleNavLinkClick}>Login</NavLink>
+                <NavLink end to={"/"} className="nav-item nav-link text-light" onClick={handleNavLinkClick}>Ingresar</NavLink>
 
             }
 

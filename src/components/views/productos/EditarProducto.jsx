@@ -1,19 +1,48 @@
 import { Button, Form, Container } from "react-bootstrap"
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { consultaEditarProducto, obtenerProducto } from "../../helpers/queries";
+import { useParams, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const EditarProducto = () => {
 
+    const { id } = useParams()
+    const navegacion = useNavigate()
     const {
         register,
         handleSubmit,
         formState: { errors },
-        // reset
+        setValue
     } = useForm();
 
-    const onSubmit = () => {
+    const onSubmit = (productoEditado) => {
         console.log("paso la validacion")
+        consultaEditarProducto(productoEditado, id).then((respuesta)=>{
+                if(respuesta && respuesta.status === 200){
+                    Swal.fire("Producto actualizado",
+                    `El producto: ${productoEditado.nombreProducto} fue actualizado corretamente`,
+                     "success")
+                     navegacion("/productos")
+                } else{
+                    Swal.fire("Ocurrio un error",
+                    `El producto: ${productoEditado.nombreProducto} NO fue actualizado. Intente esta operacion luego`,
+                     "error")
+                }
+            
+        })
     }
+
+    useEffect(() => {
+        obtenerProducto(id).then((respuesta) => {
+            setValue("nombreProducto", respuesta.nombreProducto)
+            setValue("precio", respuesta.precio)
+            setValue("categoria", respuesta.categoria)
+            setValue("stock", respuesta.stock)
+        })
+
+    }, [])
 
     return (
         <Container className="my-4">
@@ -61,10 +90,12 @@ const EditarProducto = () => {
                         ...register('categoria', {
                             required: 'Debe seleccionar una categoria',
                         })}>
-                        <option value="">Seleccione una opcion</option>
-                        <option value="1">opcion 1</option>
-                        <option value="2">opcion 2</option>
-                        <option value="3">opcion 3</option>
+                       <option value="">Seleccione una opcion</option>
+                        <option value="Bebidas sin alcohol">Bebidas sin alcohol</option>
+                        <option value="Bebidas con alcohol">Bebidas con alcohol</option>
+                        <option value="Comestibles">Comestibles</option>
+                        <option value="Cigarros">Cigarros</option>
+                        <option value="Golosinas">Golosinas</option>
                     </Form.Select>
                     <Form.Text className="text-danger">
                         {errors.categoria?.message}

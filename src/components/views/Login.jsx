@@ -1,5 +1,5 @@
 import { Form, Button, Container, Card } from "react-bootstrap";
-// import { login } from "../helpers/queries";
+import { login } from "../helpers/queries";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom"
@@ -15,26 +15,25 @@ const Login = ({setUsuarioLogueado}) => {
     const navegacion = useNavigate()
 
     const onSubmit = (usuario) => {
-        // login(usuario).then((respuesta) => {
-            console.log( usuario) 
-             if (usuario.email == "admin@gmail.com" && usuario.password === "joackobj") {
+        login(usuario).then((respuesta) => {
+            if (respuesta) {
                 //debo loguear al usuario
-                 sessionStorage.setItem("usuarioLogueado", JSON.stringify(usuario))
-                 setUsuarioLogueado(usuario)
-                 Swal.fire("Bienvenido", "Ingreso correcto", "success")
-                 navegacion("/inicio")
+                sessionStorage.setItem("usuarioLogueado", JSON.stringify(respuesta))
+                setUsuarioLogueado(respuesta)
+                Swal.fire("Bienvenido", "Ingreso correcto", "success")
+                navegacion("/inicio")
 
-             } else {
+            } else {
                 // mostrar mensaje de error, usuario o password incorrectos
-                 Swal.fire("Error", "Email o password incorrecto", "error")
-             }
-        //  })
+                Swal.fire("Error", "Email o password incorrecto", "error")
+            }
+        })
     }
 
     return (
         <Container className="main">
             <Card className="my-5">
-                <Card.Header as="h5">Ingresar</Card.Header>
+                <Card.Header as="h5">Ingreso Administrador</Card.Header>
                 <Card.Body>
                      <Form onSubmit={handleSubmit(onSubmit)}> 
                         <Form.Group className="mb-3" controlId="formBasicEmail">

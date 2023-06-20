@@ -1,5 +1,8 @@
 import { Button, Form, Container } from "react-bootstrap"
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import { consultaCrearProducto } from "../../helpers/queries";
+
 
 
 const CrearProducto = () => {
@@ -8,11 +11,29 @@ const CrearProducto = () => {
         register,
         handleSubmit,
         formState: { errors },
-        // reset
+        reset
     } = useForm();
 
-    const onSubmit = () => {
+    const onSubmit = (productoNuevo) => {
+        console.log(productoNuevo)
         console.log("paso la validacion")
+        // realizar la peticion que agrewga producto a la api
+        consultaCrearProducto(productoNuevo).then((respuesta)=>{
+            if(respuesta.status === 201){
+                Swal.fire(
+                    'Agregado!',
+                    `El producto ${productoNuevo.nombreProducto} fue creado`,
+                    'success'
+                )
+                reset()
+            } else{
+                Swal.fire(
+                    'Error!',
+                    `No se pudo procesar su peticion`,
+                    'error'
+                )
+            }
+        })
     }
 
     return (
@@ -62,9 +83,11 @@ const CrearProducto = () => {
                             required: 'Debe seleccionar una categoria',
                         })}>
                         <option value="">Seleccione una opcion</option>
-                        <option value="1">opcion 1</option>
-                        <option value="2">opcion 2</option>
-                        <option value="3">opcion 3</option>
+                        <option value="Bebidas sin alcohol">Bebidas sin alcohol</option>
+                        <option value="Bebidas con alcohol">Bebidas con alcohol</option>
+                        <option value="Comestibles">Comestibles</option>
+                        <option value="Cigarros">Cigarros</option>
+                        <option value="Golosinas">Golosinas</option>
                     </Form.Select>
                     <Form.Text className="text-danger">
                         {errors.categoria?.message}

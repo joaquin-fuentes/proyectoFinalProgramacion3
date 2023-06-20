@@ -2,8 +2,29 @@ import React from 'react';
 import { Container, Button, Table, Form, InputGroup, Row, Col } from "react-bootstrap"
 import { Link, NavLink } from "react-router-dom"
 import ItemProducto from './ItemProducto';
+import { useEffect, useState } from 'react';
+import Swal from "sweetalert2"
+import { obtenerProductos } from '../../../../../cafecito/src/components/helpers/queries';
+
+
 
 const Productos = () => {
+
+    const [productos, setProductos] = useState([])
+
+    // const navegacion = useNavigate()
+
+    useEffect(()=>{
+        obtenerProductos().then((respuesta)=>{
+            if (respuesta != null){
+                setProductos(respuesta)
+            } else{
+                Swal.fire("Error", "No se pudo obtener los datos de la API", "error")
+                // navegacion("/error404")
+            }
+        })
+    },[])
+
     return (
         <Container className='my-3 main'>
             <div className='mb-3 d-flex justify-content-between '>
@@ -57,12 +78,11 @@ const Productos = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <ItemProducto></ItemProducto>
-                    <ItemProducto></ItemProducto>
-                    <ItemProducto></ItemProducto>
-                    <ItemProducto></ItemProducto>
-                    <ItemProducto></ItemProducto>
-                    <ItemProducto></ItemProducto>
+                    {
+                        productos.map((producto)=>{
+                           return  <ItemProducto producto={producto} setProductos={setProductos} key={producto.id}></ItemProducto>
+                        })
+                    }
                 </tbody>
             </Table>
         </Container>

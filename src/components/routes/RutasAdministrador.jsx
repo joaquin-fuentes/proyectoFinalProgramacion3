@@ -24,7 +24,7 @@ const RutasAdministrador = () => {
                 <Route exact path="/compras/detalle" element={<DetalleCompra></DetalleCompra>} ></Route>
                 <Route exact path="/productos" element={<AdministradorProductos></AdministradorProductos>} ></Route>
                 <Route exact path="/productos/crear" element={<CrearProducto></CrearProducto>} ></Route>
-                <Route exact path="/productos/editar" element={<EditarProducto></EditarProducto>} ></Route>
+                <Route exact path="/productos/editar/:id" element={<EditarProducto></EditarProducto>} ></Route>
                 <Route exact path="/resumen" element={<Resumen></Resumen>} ></Route>
             </Routes>
         </>

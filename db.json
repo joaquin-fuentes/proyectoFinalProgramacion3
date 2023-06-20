@@ -1,0 +1,90 @@
+{
+  "productos": [
+    {
+      "nombreProducto": "Pepsi 2L ",
+      "precio": 500,
+      "categoria": "Bebidas sin alcohol",
+      "stock": 10,
+      "id": 1
+    },
+    {
+      "nombreProducto": "coca cola 3L",
+      "precio": "1200",
+      "categoria": "Bebidas sin alcohol",
+      "stock": "7",
+      "id": 2
+    },
+    {
+      "nombreProducto": "Cerveza Norte 1L ",
+      "precio": 700,
+      "categoria": "Bebidas con alcohol",
+      "stock": 12,
+      "id": 3
+    },
+    {
+      "nombreProducto": "Philiph Morris 20",
+      "precio": "500",
+      "categoria": "Cigarros",
+      "stock": "15",
+      "id": 4
+    }
+  ],
+  "usuarios": [
+    {
+      "id": 1,
+      "nombreUsuario": "Admin",
+      "email": "admin@gmail.com",
+      "password": "123456"
+    }
+  ],
+  "compras": [
+    {
+      "id": 1,
+      "fecha": "13/01/1994",
+      "proveedor": "Pepsi S.A",
+      "password": "123456",
+      "productosComprados": [
+        {
+          "nombreProducto": "pepsi 2L",
+          "precio": 500,
+          "cantidad": 6
+        },
+        {
+          "nombreProducto": "coca cola 3L",
+          "precio": 1000,
+          "cantidad": 6
+        },
+        {
+          "nombreProducto": "doble cola 3L",
+          "precio": 400,
+          "cantidad": 6
+        }
+      ]
+    }
+  ],
+  "ventas": [
+    {
+      "id": 1,
+      "fecha": "13/01/1994",
+      "nombreCliente": "nombre del cliente",
+      "nombreVendedor": "nombre del vendedor",
+      "productosVendidos": [
+        {
+          "nombreProducto": "pepsi 2L",
+          "precio": 500,
+          "cantidad": 6
+        },
+        {
+          "nombreProducto": "coca cola 3L",
+          "precio": 1000,
+          "cantidad": 6
+        },
+        {
+          "nombreProducto": "doble cola 3L",
+          "precio": 400,
+          "cantidad": 6
+        }
+      ]
+    }
+  ]
+}
