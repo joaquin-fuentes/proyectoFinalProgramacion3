@@ -1,29 +1,31 @@
-import { Button, Form, Container } from "react-bootstrap"
+import React, { useState, useEffect } from "react";
+import { Button, Form, Container, Table } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { obtenerProductos, consultaCrearCompra, consultaEditarProducto } from "../../helpers/queries";
-import React, { useState, useEffect } from "react";
+import { obtenerProductos, obtenerCompra, consultaEditarCompra, consultaEditarProducto } from "../../helpers/queries";
+import { useParams, useNavigate } from "react-router-dom";
 
+const EditarCompra = () => {
 
+    const { id } = useParams()
 
-
-const CrearCompra = () => {
     const [productos, setProductos] = useState([]);
     const [importeTotal, setImporteTotal] = useState(0)
     const [productosComprados, setProductosComprados] = useState([])
     const [productoAgregado, setProductoAgregado] = useState({})
     const [productosAEditar, setProductosAEditar] = useState([])
 
+
     const {
         register,
         handleSubmit,
         formState: { errors },
-         reset
+        reset,
+        setValue
     } = useForm();
-    
 
-    
     useEffect(() => {
+
         obtenerProductos().then((respuesta) => {
             if (respuesta != null) {
                 setProductos(respuesta);
@@ -38,24 +40,43 @@ const CrearCompra = () => {
         });
         buscarProductosYNuevoStock(productos, productosComprados)
 
-
     }, [productosComprados]);
+
+    useEffect(() => {
+        obtenerCompra(id).then((respuesta) => {
+            if (respuesta != null) {
+                setValue("fechaCompra", respuesta.fechaCompra)
+                setValue("proveedor", respuesta.proveedor)
+                setImporteTotal(respuesta.importeTotal)
+                setProductosComprados(respuesta.productosComprados)
+            } else {
+                Swal.fire(
+                    "Error",
+                    "No se pudo obtener los datos de la API",
+                    "error"
+                );
+                // navegacion("/error404")
+            }
+        })
+    }, [])
 
     const onSubmit = (datos) => {
         console.log("paso la validacion")
         const nuevaCompra = { ...datos, productosComprados: productosComprados, importeTotal: importeTotal }
-        // realizar la peticion que agrewga la compra a la api
-        consultaCrearCompra(nuevaCompra).then((respuesta) => {
-            if (respuesta.status === 201) {
+        // realizar la peticion que agrewga la venta a la api
+        console.log("nueva venta")
+        console.log(nuevaCompra)
+        consultaEditarCompra(nuevaCompra, id).then((respuesta) => {
+            if (respuesta.status === 200) {
                 Swal.fire(
-                    'Compra Creada!',
-                    `La nueva compra fue creada con exito`,
+                    'Compra Editada!',
+                    `La compra fue actualizada con exito`,
                     'success'
                 )
                 console.log("Productos a editar:")
                 console.log(productosAEditar)
                 productosAEditar.forEach((productoAEditar) => {
-                    for(let i = 0;i<productoAEditar.length;i++){
+                    for (let i = 0; i < productoAEditar.length; i++) {
                         consultaEditarProducto(productoAEditar[i], productoAEditar[i].id).then((respuesta) => {
                             if (respuesta.status === 200) {
                                 console.log(productoAEditar[i])
@@ -65,8 +86,9 @@ const CrearCompra = () => {
                             }
                         })
                     }
-                    
+
                 })
+
                 reset()
                 setProductosComprados([])
                 setProductoAgregado({})
@@ -79,7 +101,10 @@ const CrearCompra = () => {
                 )
             }
         })
-    }
+
+
+
+    };
     const agregarProducto = () => {
         if (productoAgregado.nombreProducto === "") {
             Swal.fire(
@@ -88,11 +113,13 @@ const CrearCompra = () => {
                 "error"
             );
         } else {
+
             const productoCoincide = productosComprados.some(
                 (productoComprado) => productoComprado.nombreProducto === productoAgregado.nombreProducto
             ); if (!productoCoincide) {
                 setProductosComprados([...productosComprados, productoAgregado])
                 buscarImporteTotal(productoAgregado)
+
             } else {
                 Swal.fire(
                     "Error",
@@ -101,15 +128,9 @@ const CrearCompra = () => {
                 );
             }
         }
-    }
-    const buscarImporteTotal = (productoAgregado) => {
-        console.log(importeTotal)
-        let sumatoria = importeTotal + (parseInt(productoAgregado.precio) * parseInt(productoAgregado.cantidad))
-        setImporteTotal(sumatoria)
-    }
-    const buscarPrecioProducto = (productoComprado) => {
-        const productoCoincidente = productos.find((productoDB) => productoDB.nombreProducto === productoComprado)
-        return productoCoincidente.precio*0.7
+
+
+
     }
 
     const buscarProductosYNuevoStock = (productos, productosComprados) => {
@@ -119,7 +140,6 @@ const CrearCompra = () => {
             const productoCoincidente = productos.find(
                 (producto) => producto.nombreProducto === productoComprado.nombreProducto
             );
-
             if (productoCoincidente) {
                 productoCoincidente.stock = productoCoincidente.stock + productoComprado.cantidad
                 nuevosProductosAEditar.push(productoCoincidente);
@@ -127,12 +147,28 @@ const CrearCompra = () => {
             }
         });
     }
-    
-    const buscarStockProductoCoincidente = (productoComprado) => {
-        const productoCoincidente = productos.find((productoDB) => productoDB.nombreProducto === productoComprado.nombreProducto)
-        return productoCoincidente.stock + productoComprado.cantidad
+
+    const buscarPrecioProducto = (productoComprado) => {
+        const productoCoincidente = productos.find((productoDB) => productoDB.nombreProducto === productoComprado)
+        return productoCoincidente.precio*0.70
     }
 
+    const buscarImporteTotal = (productoAgregado) => {
+        console.log(importeTotal)
+        let sumatoria = importeTotal + (parseInt(productoAgregado.precio) * parseInt(productoAgregado.cantidad))
+        setImporteTotal(sumatoria)
+    }
+
+    const buscarStockProductoCoincidente = (productoComprado) => {
+        const productoCoincidente = productos.find(
+            (productoDB) => productoDB.nombreProducto === productoComprado.nombreProducto
+        );
+        if (productoCoincidente) {
+            return productoCoincidente.stock + productoComprado.cantidad;
+        } else {
+            return 0; // o el valor predeterminado que desees cuando no se encuentra el producto
+        }
+    }
     const sumarCantidad = (productoComprado) => {
             productoComprado.cantidad = productoComprado.cantidad + 1
             setProductosComprados([...productosComprados])
@@ -151,24 +187,28 @@ const CrearCompra = () => {
             setImporteTotal(importeTotal - parseInt(productoComprado.precio))
         }
     }
+
     const borrarProductoComprado = (indice, productoComprado) => {
         const nuevosProductosComprados = [...productosComprados];
         nuevosProductosComprados.splice(indice, 1);
         setProductosComprados(nuevosProductosComprados);
         setImporteTotal(importeTotal - (parseInt(productoComprado.precio) * (parseInt(productoComprado.cantidad))))
     }
+
+
     return (
-        <Container className="main my-4">
-            <h2>Nueva Compra</h2>
+        <Container className="my-4">
+            <h2>Detalle de Compra</h2>
             <hr />
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group className="mb-3">
                     <Form.Label>Fecha</Form.Label>
-                    <Form.Control type="date" {
-                        ...register('fechaCompra', {
-                            required: 'El campo es obligatorio',
-                        })
-                    } />
+                    <Form.Control
+                        type="date"
+                        {...register("fechaCompra", {
+                            required: "El campo es obligatorio"
+                        })}
+                    />
                     <Form.Text className="text-danger">
                         {errors.fechaCompra?.message}
                     </Form.Text>
@@ -180,7 +220,7 @@ const CrearCompra = () => {
                         placeholder="Ingrese aqui el nombre del proveedor"
                         maxLength={50}
                         minLength={4}
-                        {...register("nombreProveedor", {
+                        {...register("proveedor", {
                             required: "El campo es obligatorio",
                             minLength: {
                                 value: 4,
@@ -193,7 +233,7 @@ const CrearCompra = () => {
                         })}
                     />
                     <Form.Text className="text-danger">
-                        {errors.nombreProveedor?.message}
+                        {errors.proveedor?.message}
                     </Form.Text>
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -220,7 +260,7 @@ const CrearCompra = () => {
                                     <button type="button" className="btn btn-outline-danger p-1 m-1" onClick={() => borrarProductoComprado(indice, productoComprado)}>Borrar</button>
                                     <span> {productoComprado.nombreProducto} - </span>
                                     <span> Precio unitario: ${productoComprado.precio} - </span>
-                                    <span> Cantidad a Comprar:
+                                    <span> Cantidad a Vender:
                                         <button type="button" className="btn btn-outline-danger m-1 px-2 py-1" onClick={() => restarCantidad(productoComprado)}> - </button>
                                         {productoComprado.cantidad}
                                         <button type="button" className="btn btn-outline-primary m-1 px-2 py-1" onClick={() => sumarCantidad(productoComprado)}> + </button>
@@ -238,13 +278,19 @@ const CrearCompra = () => {
                         value={importeTotal}
                         disabled
                     />
+                    <Form.Text className="text-danger">
+                        {errors.importeVenta?.message}
+                    </Form.Text>
                 </Form.Group>
                 <Button variant="primary" type="submit" className="mt-2">
-                    Comprar
+                    Editar
                 </Button>
             </Form>
         </Container>
     );
 };
 
-export default CrearCompra;
+export default EditarCompra;
+
+
+

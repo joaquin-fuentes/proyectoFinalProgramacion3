@@ -181,3 +181,75 @@ export const consultaEditarVenta = async (venta, id)=>{
     }
 }
 
+// COMPRAS
+
+
+export const obtenerCompras = async ()=>{
+    try {
+        const respuesta = await fetch(URL_COMPRA)
+        const listaCompras = await respuesta.json()
+        return listaCompras
+
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+export const obtenerCompra = async (id)=>{
+    try {
+        const respuesta = await fetch(`${URL_COMPRA}/${id}`)
+        const compraEditar = await respuesta.json()
+        return compraEditar
+
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
+export const consultaBorrarCompra = async (id)=>{
+    try {
+        const respuesta = await fetch(`${URL_COMPRA}/${id}` , {
+            method:"DELETE"
+        });
+        return respuesta
+
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
+export const consultaCrearCompra = async (compra)=>{
+    try {
+        const respuesta = await fetch(URL_COMPRA, {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(compra)
+        });
+        return respuesta
+
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
+export const consultaEditarCompra = async (compra, id)=>{
+    try {
+        const respuesta = await fetch(URL_COMPRA+"/"+id, {
+            method: "PUT",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(compra)
+        });
+        return respuesta
+
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}

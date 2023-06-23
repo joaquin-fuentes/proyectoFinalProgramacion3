@@ -63,7 +63,6 @@ const CrearVenta = () => {
                     }
                     
                 })
-
                 reset()
                 setProductosVendidos([])
                 setProductoAgregado({})
@@ -76,9 +75,6 @@ const CrearVenta = () => {
                 )
             }
         })
-
-
-
     };
     const agregarProducto = () => {
         if (productoAgregado.nombreProducto === "") {
@@ -268,9 +264,6 @@ const CrearVenta = () => {
                         value={importeTotal}
                         disabled
                     />
-                    <Form.Text className="text-danger">
-                        {errors.importeVenta?.message}
-                    </Form.Text>
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label>Vendedor</Form.Label>

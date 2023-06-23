@@ -2,8 +2,32 @@ import React from 'react';
 import { Container, Button, Table, Form, InputGroup, Row, Col } from "react-bootstrap"
 import { Link, NavLink } from "react-router-dom"
 import ItemCompra from './ItemCompra';
+import { useEffect, useState } from 'react';
+import { obtenerCompras } from '../../helpers/queries';
+import Swal from "sweetalert2"
 
 const Compras = () => {
+    const [compras, setCompras] = useState([])
+
+    useEffect(()=>{
+        obtenerCompras().then((respuesta)=>{
+            if (respuesta != null){
+                setCompras(respuesta)
+            } else{
+                Swal.fire("Error", "No se pudo obtener los datos de la API", "error")
+                // navegacion("/error404")
+            }
+        })
+    },[])
+    
+    function calcularTotalCompras(compras) {
+        let totalCompras = 0
+        compras.forEach((compra)=>{
+            totalCompras = totalCompras + compra.importeTotal
+        })
+        return totalCompras
+      }
+
     return (
         <Container className='my-3 main'>
             <div className='mb-3 d-flex justify-content-between '>
@@ -56,15 +80,14 @@ const Compras = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <ItemCompra></ItemCompra>
-                    <ItemCompra></ItemCompra>
-                    <ItemCompra></ItemCompra>
-                    <ItemCompra></ItemCompra>
-                    <ItemCompra></ItemCompra>
-                    <ItemCompra></ItemCompra>
+                     {
+                        compras.map((compra)=>{
+                            return <ItemCompra compra={compra} setCompras={setCompras} key={compra.id}></ItemCompra>
+                        })
+                    }
                 </tbody>
             </Table>
-            <h4>Total Egresos: $3600</h4>
+             <h4>Total Egresos: ${calcularTotalCompras(compras)}</h4> 
         </Container>
     );
 };

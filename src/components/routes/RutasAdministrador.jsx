@@ -5,7 +5,7 @@ import CrearVenta from "../views/ventas/CrearVenta";
 import EditarVenta from "../views/ventas/EditarVenta";
 import AdministradorCompras from "../views/compras/AdministradorCompras"
 import CrearCompra from "../views/compras/CrearCompra";
-import DetalleCompra from "../views/compras/DetalleCompra";
+import EditarCompra from "../views/compras/EditarCompra";
 import AdministradorProductos from "../views/productos/AdministradorProductos"
 import CrearProducto from "../views/productos/CrearProducto";
 import EditarProducto from "../views/productos/EditarProducto";
@@ -21,7 +21,7 @@ const RutasAdministrador = () => {
                 <Route exact path="/ventas/detalle/:id" element={<EditarVenta></EditarVenta>} ></Route>
                 <Route exact path="/compras" element={<AdministradorCompras></AdministradorCompras>} ></Route>
                 <Route exact path="/compras/crear" element={<CrearCompra></CrearCompra>} ></Route>
-                <Route exact path="/compras/detalle" element={<DetalleCompra></DetalleCompra>} ></Route>
+                <Route exact path="/compras/detalle/:id" element={<EditarCompra></EditarCompra>} ></Route>
                 <Route exact path="/productos" element={<AdministradorProductos></AdministradorProductos>} ></Route>
                 <Route exact path="/productos/crear" element={<CrearProducto></CrearProducto>} ></Route>
                 <Route exact path="/productos/editar/:id" element={<EditarProducto></EditarProducto>} ></Route>

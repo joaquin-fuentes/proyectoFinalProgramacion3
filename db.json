@@ -4,7 +4,7 @@
       "nombreProducto": "Pepsi 2L ",
       "precio": 500,
       "categoria": "Bebidas sin alcohol",
-      "stock": 3,
+      "stock": 20,
       "id": 1
     },
     {
@@ -40,7 +40,7 @@
   "compras": [
     {
       "id": 1,
-      "fecha": "13/01/1994",
+      "fechaCompra": "2023-06-22",
       "proveedor": "Pepsi S.A",
       "password": "123456",
       "productosComprados": [
@@ -59,7 +59,34 @@
           "precio": 400,
           "cantidad": 6
         }
-      ]
+      ],
+      "importeTotal": 2200
+    },
+    {
+      "fechaCompra": "2023-06-08",
+      "proveedor": "Pepsi. SA",
+      "productosComprados": [
+        {
+          "nombreProducto": "Pepsi 2L ",
+          "precio": "350",
+          "cantidad": 10
+        }
+      ],
+      "importeTotal": 3500,
+      "id": 2
+    },
+    {
+      "fechaCompra": "2023-06-07",
+      "proveedor": "Pepsi SA",
+      "productosComprados": [
+        {
+          "nombreProducto": "Pepsi 2L ",
+          "precio": "350",
+          "cantidad": 14
+        }
+      ],
+      "importeTotal": 4900,
+      "id": 3
     }
   ],
   "ventas": [

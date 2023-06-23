@@ -141,16 +141,12 @@ const EditarVenta = () => {
             const productoCoincidente = productos.find(
                 (producto) => producto.nombreProducto === productoVendido.nombreProducto
             );
-
             if (productoCoincidente) {
                 productoCoincidente.stock = productoCoincidente.stock - productoVendido.cantidad
                 nuevosProductosAEditar.push(productoCoincidente);
                 setProductosAEditar([nuevosProductosAEditar])
             }
-
         });
-
-
     }
 
     const buscarPrecioProducto = (productoVendido) => {
@@ -173,7 +169,6 @@ const EditarVenta = () => {
         } else {
             return 0; // o el valor predeterminado que desees cuando no se encuentra el producto
         }
-
     }
     const sumarCantidad = (productoVendido) => {
         if (buscarStockProductoCoincidente(productoVendido) === 0) {
