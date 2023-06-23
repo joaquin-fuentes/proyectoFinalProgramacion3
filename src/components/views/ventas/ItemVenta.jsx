@@ -53,6 +53,7 @@ const ItemVenta = ({venta, setVentas}) => {
         <td>{venta.nombreVendedor}</td>
         <td className='text-center'>
           <NavLink end to={`/ventas/detalle/${venta.id}`} className={"btn btn-success"} >Ver detalle</NavLink>
+          <NavLink end to={""} className={"m-1 btn btn-outline-danger"} onClick={borrarVenta} >Borrar</NavLink>
         </td>
     </tr>
     );

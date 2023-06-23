@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import Inicio from "../views/Inicio";
 import AdministradorVentas from "../views/ventas/AdministradorVentas"
 import CrearVenta from "../views/ventas/CrearVenta";
-import DetalleVenta from "../views/ventas/DetalleVenta";
+import EditarVenta from "../views/ventas/EditarVenta";
 import AdministradorCompras from "../views/compras/AdministradorCompras"
 import CrearCompra from "../views/compras/CrearCompra";
 import DetalleCompra from "../views/compras/DetalleCompra";
@@ -18,7 +18,7 @@ const RutasAdministrador = () => {
                 <Route exact path="/inicio" element={<Inicio></Inicio>} ></Route>
                 <Route exact path="/ventas" element={<AdministradorVentas></AdministradorVentas>} ></Route>
                 <Route exact path="/ventas/crear" element={<CrearVenta></CrearVenta>} ></Route>
-                <Route exact path="/ventas/detalle/:id" element={<DetalleVenta></DetalleVenta>} ></Route>
+                <Route exact path="/ventas/detalle/:id" element={<EditarVenta></EditarVenta>} ></Route>
                 <Route exact path="/compras" element={<AdministradorCompras></AdministradorCompras>} ></Route>
                 <Route exact path="/compras/crear" element={<CrearCompra></CrearCompra>} ></Route>
                 <Route exact path="/compras/detalle" element={<DetalleCompra></DetalleCompra>} ></Route>
