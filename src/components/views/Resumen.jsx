@@ -1,7 +1,52 @@
 import React from 'react';
 import { Container, Form, Button, InputGroup, Col, Row, Card } from 'react-bootstrap';
+import { obtenerVentas, obtenerCompras } from '../helpers/queries';
+import { useEffect, useState } from 'react';
+
+
 
 const Resumen = () => {
+    const [ventas, setVentas] = useState([])
+    const [compras, setCompras] = useState([])
+
+    useEffect(() => {
+        obtenerVentas().then((respuesta) => {
+            if (respuesta != null) {
+                setVentas(respuesta)
+            } else {
+                Swal.fire("Error", "No se pudo obtener los datos de la API", "error")
+                // navegacion("/error404")
+            }
+        })
+        obtenerCompras().then((respuesta) => {
+            if (respuesta != null) {
+                setCompras(respuesta)
+            } else {
+                Swal.fire("Error", "No se pudo obtener los datos de la API", "error")
+                // navegacion("/error404")
+            }
+        })
+    }, [])
+
+    function calcularTotalVentas(ventas) {
+        let totalVentas = 0
+        ventas.forEach((venta) => {
+            totalVentas = totalVentas + venta.importeTotal
+        })
+        return totalVentas
+    }
+    function calcularTotalCompras(compras) {
+        let totalCompras = 0
+        compras.forEach((compra) => {
+            totalCompras = totalCompras + compra.importeTotal
+        })
+        return totalCompras
+    }
+    function calcularEstadoResultado(compras, ventas) {
+      let total = 0
+       total = calcularTotalVentas(ventas) - calcularTotalCompras(compras) 
+       return total
+    }
     return (
         <Container className='my-3 main'>
             <div className='mb-3 d-flex justify-content-between '>
@@ -41,7 +86,7 @@ const Resumen = () => {
                             <Card.Text>
                                 <span>Desde: 20/05/2022</span>  <br />
                                 <span>Hasta: 20/06/2022</span>  <br />
-                                <span className='mt-5 fs-2 fw-bold'>$75.000 </span>
+                                <span className='mt-5 fs-2 fw-bold'>${calcularTotalVentas(ventas)} </span>
                             </Card.Text>
                         </Card.Body>
                     </Card>
@@ -53,7 +98,7 @@ const Resumen = () => {
                             <Card.Text>
                                 <span>Desde: 20/05/2022</span>  <br />
                                 <span>Hasta: 20/06/2022</span>  <br />
-                                <span className='mt-5 fs-2 fw-bold'>$27.000 </span>
+                                <span className='mt-5 fs-2 fw-bold'>${calcularTotalCompras(compras)} </span>
                             </Card.Text>
                         </Card.Body>
                     </Card>
@@ -65,7 +110,7 @@ const Resumen = () => {
                             <Card.Text>
                                 <span>Desde: 20/05/2022</span>  <br />
                                 <span>Hasta: 20/06/2022</span>  <br />
-                                <span className='mt-5 fs-2 fw-bold'>$48.000 </span>
+                                <span className='mt-5 fs-2 fw-bold'>${calcularEstadoResultado(compras, ventas)} </span>
                             </Card.Text>
                         </Card.Body>
                     </Card>
