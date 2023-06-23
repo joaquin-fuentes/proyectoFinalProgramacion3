@@ -180,3 +180,4 @@ export const consultaEditarVenta = async (venta, id)=>{
         return null
     }
 }
+

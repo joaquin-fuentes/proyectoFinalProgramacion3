@@ -1,12 +1,16 @@
 import { Button } from "react-bootstrap"
 import Swal from "sweetalert2"
 import {consultaBorrarProducto, obtenerProductos} from "../../helpers/queries.js"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 const ItemProducto = ({importeTotal, setProductos, producto, setImporteTotal}) => {
     const [cantidadVenta, setCantidadVenta] = useState(0)
 
+   
+    const consultarImporteTotal=()=>{
+        setImporteTotal(cantidadVenta*producto.precio)
+    }
     const sumarCantidadVenta = ()=>{
         if(producto.stock === 0){
             Swal.fire(
@@ -17,8 +21,8 @@ const ItemProducto = ({importeTotal, setProductos, producto, setImporteTotal}) =
         } else{
             producto.stock = producto.stock - 1
             setCantidadVenta(cantidadVenta+1)
-            setImporteTotal(cantidadVenta*producto.precio)
-
+            consultarImporteTotal()
+            
         }
     }
     const restarCantidadVenta = ()=>{
@@ -31,7 +35,8 @@ const ItemProducto = ({importeTotal, setProductos, producto, setImporteTotal}) =
         } else{
             producto.stock = producto.stock + 1
             setCantidadVenta(cantidadVenta-1)
-            setImporteTotal(cantidadVenta*producto.precio)
+            consultarImporteTotal()
+            
             console.log(importeTotal)
         }
     }

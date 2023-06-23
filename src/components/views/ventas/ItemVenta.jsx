@@ -7,8 +7,7 @@ import { useState } from "react";
 
 const ItemVenta = ({venta, setVentas}) => {
     
-    const [importeTotal, setImporteTotal] = useState("")
-    const [sumatoria, setSumatoria] = useState(0)
+   
 
 
     const borrarVenta = () => {
@@ -43,27 +42,14 @@ const ItemVenta = ({venta, setVentas}) => {
         })
     }
   
-    function calcularTotalVenta(venta) {
-        let totalVenta = 0;
-        
-        venta.productosVendidos.forEach(producto => {
-          const precioProducto = producto.precio;
-          const cantidadVendida = producto.cantidad;
-          
-          const importeProducto = precioProducto * cantidadVendida;
-          
-          totalVenta += importeProducto;
-        });
-        
-        return totalVenta;
-      }
+    
 
     return (
         <tr>
         <td>{venta.id}</td>
-        <td>{venta.fecha}</td>
+        <td>{venta.fechaVenta}</td>
         <td>{venta.nombreCliente}</td>
-        <td>${calcularTotalVenta(venta)}</td>
+        <td>${venta.importeTotal}</td>
         <td>{venta.nombreVendedor}</td>
         <td className='text-center'>
           <NavLink end to={`/ventas/detalle/${venta.id}`} className={"btn btn-success"} >Ver detalle</NavLink>

@@ -23,21 +23,11 @@ const Ventas = () => {
 
     
     function calcularTotalVentas(ventas) {
-        let totalVentas = 0;
-        let totalVenta = 0
-        
+        let totalVentas = 0
         ventas.forEach((venta)=>{
-            venta.productosVendidos.forEach(producto => {
-                const precioProducto = producto.precio;
-                const cantidadVendida = producto.cantidad;
-                
-                const importeProducto = precioProducto * cantidadVendida;
-                
-                totalVenta += importeProducto;
-                return totalVenta
-              })
+            totalVentas = totalVentas + venta.importeTotal
         })
-        return totalVenta;
+        return totalVentas
       }
       
     return (
